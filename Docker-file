@@ -1,0 +1,9 @@
+FROM node:ubuntu
+ARG REPOPATH
+ARG CURRENT_BRANCH
+
+RUN git clone "$REPOPATH" /repo &&\
+         cd /repo &&\
+         git checkout "$CURRENT_BRANCH"
+RUN npm install
+RUN ng serve
