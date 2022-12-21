@@ -1,4 +1,4 @@
-name: Angular CI
+name: stages
 
 on:
   push:
@@ -36,7 +36,8 @@ jobs:
 
 
   unit-testing:
-
+    needs: build
+    
     runs-on: ubuntu-latest
 
     strategy:
@@ -62,7 +63,8 @@ jobs:
 
   
   lint:
-
+    needs: build
+    
     runs-on: ubuntu-latest
 
     strategy:
