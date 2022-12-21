@@ -98,23 +98,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Check out code
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+
+
+    
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name : Install Dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build --if-present -- --prod
-
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: khalednagah/khaleddockerrepo
+        image: khalednagah/khaleddockerrepo2
         tags: v1, latest
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
