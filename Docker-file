@@ -1,5 +1,0 @@
-FROM node:ubuntu
-COPY ./
-RUN npm install
-EXPOSE 8080
-RUN ng serve
