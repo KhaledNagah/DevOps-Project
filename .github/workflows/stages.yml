@@ -113,7 +113,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
    
     - name: Build and push
-      run: docker build .
+      run: docker build -t khaleddockerrepo2 .
       
   # Building the docker image and pushing it to DockerHub 
    # - name: Build and push
