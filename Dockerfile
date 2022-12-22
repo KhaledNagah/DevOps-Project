@@ -36,7 +36,7 @@
 
 
 
-FROM node:ubuntu
+FROM ubuntu-latest
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
