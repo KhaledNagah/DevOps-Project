@@ -41,6 +41,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 4200
+EXPOSE 8080
 RUN npm install -g @angular/cli
 CMD ["ng", "serve"]
