@@ -125,7 +125,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:CURRENT_TIMESTAMP
+        tags: khalednagah/khaleddockerrepo:${{ env.CURRENT_TIMESTAMP}}
         
     #Enter the VM
     - name: executing remote ssh commands using ssh key
@@ -137,7 +137,7 @@ jobs:
         port: ${{ secrets.HOST_PORT }}
         script: | 
           docker kill $(docker ps -q)
-          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:CURRENT_TIMESTAMP
+          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.CURRENT_TIMESTAMP}}
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
