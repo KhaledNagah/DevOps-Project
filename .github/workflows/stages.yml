@@ -157,7 +157,7 @@ jobs:
         port: ${{ secrets.HOST_PORT }}
         script: | 
           docker kill $(docker ps -q)
-          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.CURRENT_TIMESTAMP}}
+          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.F_TIME}}
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
