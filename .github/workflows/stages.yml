@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  CURRENT_TIMESTAMP: "${{ steps.current-time.outputs.time }}"
+#env:
+  #CURRENT_TIMESTAMP: "${{ steps.current-time.outputs.time }}"
 
 
 jobs:
