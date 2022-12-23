@@ -130,8 +130,8 @@ jobs:
     - name: Usage
       env:
         CURRENT_TIMESTAMP: "${{ steps.time.outputs.time }}"
-        run: |
-          echo $TIME
+      run: |
+        echo $TIME
           
     - name: Build and push
       uses: docker/build-push-action@v2
