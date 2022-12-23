@@ -122,7 +122,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:testpush8
+        tags: khalednagah/khaleddockerrepo:testpush9
         
     #Enter the VM
     - name: executing remote ssh commands using ssh key
@@ -132,7 +132,9 @@ jobs:
         username: ${{ secrets.HOST_USERNAME }}
         key: ${{ secrets.HOST_PRIVATE_KEY }}
         port: ${{ secrets.HOST_PORT }}
-        script: docker run -p 4200:4200 khalednagah/khaleddockerrepo:testpush8
+        script: | 
+          docker kill $(docker ps -q)
+          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:testpush9
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
