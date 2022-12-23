@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 env:
-  CURRENT_TIMESTAMP: ${{date +'%Y-%m-%d'}}
+  CURRENT_TIMESTAMP: "${{ steps.current-time.outputs.time }}"
+
 
 jobs:
   build:
