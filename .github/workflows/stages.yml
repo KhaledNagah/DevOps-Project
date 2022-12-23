@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  CURRENT_TIMESTAMP: "$(date +'%Y-%m-%dT%H-%M-%S')"
+  CURRENT_TIMESTAMP: "date +'%Y-%m-%dT%H-%M-%S'"
 
 jobs:
   build:
