@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CURRENT_TIMESTAMP: "$(date +'%Y-%m-%dT%H-%M-%S')"
+
 jobs:
   build:
 
@@ -122,7 +125,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:testpush9
+        tags: khalednagah/khaleddockerrepo:CURRENT_TIMESTAMP
         
     #Enter the VM
     - name: executing remote ssh commands using ssh key
@@ -134,7 +137,7 @@ jobs:
         port: ${{ secrets.HOST_PORT }}
         script: | 
           docker kill $(docker ps -q)
-          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:testpush9
+          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:CURRENT_TIMESTAMP
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
