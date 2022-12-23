@@ -122,7 +122,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:testpush6
+        tags: khalednagah/khaleddockerrepo
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
