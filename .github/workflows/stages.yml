@@ -10,6 +10,9 @@ on:
 
 
 jobs:
+
+
+   
     
 
   build:
@@ -121,17 +124,20 @@ jobs:
      # run: docker build -t khaleddockerrepo3 .
       
    #Building the docker image and pushing it to DockerHub 
-    - name: Get Time
-      id: time
-      uses: nanzm/get-time-action@v1.1
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
       with:
-        timeZone: 8
-        format: 'YYYY-MM-DD-HH-mm-ss'
-    - name: Usage
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
+    - name: Use current time
       env:
-        CURRENT_TIMESTAMP: "${{ steps.time.outputs.time }}"
-      run: |
-        echo $TIME
+        TIME: "${{ steps.current-time.outputs.time }}"
+        R_TIME: "${{ steps.current-time.outputs.readableTime }}"
+        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+        YEAR: "${{ steps.current-time.outputs.year }}"
+        DAY: "${{ steps.current-time.outputs.day }}"
+      run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
           
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -139,7 +145,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:${{ env.CURRENT_TIMESTAMP}}
+        tags: khalednagah/khaleddockerrepo:${{ env.F_TIME}}
         
     #Enter the VM
     - name: executing remote ssh commands using ssh key
