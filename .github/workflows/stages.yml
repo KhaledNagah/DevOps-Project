@@ -123,6 +123,16 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: khalednagah/khaleddockerrepo
+        
+    #Enter the VM
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.HOST_IP }}
+        username: ${{ secrets.HOST_USERNAME }}
+        key: ${{ secrets.HOST_PRIVATE_KEY }}
+        port: ${{ secrets.HOST_PORT }}
+        script: docker run -p 4200:4200 khalednagah/khaleddockerrepo:testpush7
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
