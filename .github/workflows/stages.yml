@@ -79,8 +79,7 @@ jobs:
 
     - name: Test
       run: npm run test-headless
-    - name: Test cont
-      run: ls e2e/
+
            
       
 
