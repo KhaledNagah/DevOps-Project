@@ -159,6 +159,8 @@ jobs:
         script: | 
           docker kill $(docker ps -q)
           docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
+          docker run -d -p 8080:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
+
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
