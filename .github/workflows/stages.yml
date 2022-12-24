@@ -157,8 +157,10 @@ jobs:
         key: ${{ secrets.HOST_PRIVATE_KEY }}
         port: ${{ secrets.HOST_PORT }}
         script: | 
-          docker kill $(docker ps -q)
+          current_containers=($(docker ps -q))
+          docker kill ${current_containers[0]}
           docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
+          docker kill ${current_containers[1]}
           docker run -d -p 8080:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
 
   #build-and-push-docker-image:
