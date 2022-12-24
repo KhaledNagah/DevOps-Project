@@ -80,7 +80,7 @@ jobs:
     - name: Test
       run: npm run test-headless
     - name: Test cont
-      run: ls
+      run: ls e2e/
            
       
 
