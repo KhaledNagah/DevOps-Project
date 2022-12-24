@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
-
+env:
+  
+  RAND_NUM=${{ github.run_id }}-${{ github.run_attempt }}
 
 
 jobs:
@@ -124,20 +126,7 @@ jobs:
      # run: docker build -t khaleddockerrepo3 .
       
    #Building the docker image and pushing it to DockerHub 
-    - name: Get current time
-      uses: josStorer/get-current-time@v2.0.2
-      id: current-time
-      with:
-        format: YYYYMMDD-HH
-        utcOffset: "+08:00"
-    - name: Use current time
-      env:
-        TIME: "${{ steps.current-time.outputs.time }}"
-        R_TIME: "${{ steps.current-time.outputs.readableTime }}"
-        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
-        YEAR: "${{ steps.current-time.outputs.year }}"
-        DAY: "${{ steps.current-time.outputs.day }}"
-      run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
+    
           
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -145,7 +134,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: khalednagah/khaleddockerrepo:${{ env.YEAR}}
+        tags: khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
         
     #Enter the VM
     - name: executing remote ssh commands using ssh key
@@ -157,7 +146,7 @@ jobs:
         port: ${{ secrets.HOST_PORT }}
         script: | 
           docker kill $(docker ps -q)
-          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.YEAR}}
+          docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
   #  
