@@ -164,6 +164,7 @@ jobs:
           docker run -d -p 4200:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
           #docker kill ${current_containers[1]}
           docker run -d -p 8080:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
+          
 
   #build-and-push-docker-image:
   #  runs-on: ubuntu-latest
