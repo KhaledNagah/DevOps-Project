@@ -8,7 +8,7 @@ on:
 
 env:
   
-  RAND_NUM=${{ github.run_id }}-${{ github.run_attempt }}
+  RAND_NUM: "${{ github.run_id }}-${{ github.run_attempt }}"
 
 
 jobs:
