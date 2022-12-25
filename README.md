@@ -28,3 +28,6 @@ Navigate to the repository at https://github.com/KhaledNagah/DevOps-Project . Co
 - As we are using Github actions as a CI/CD tool, go to actions tab in github and navigate to the latest workflow run to monitor the CI/CD pipeline progress.
 
 - You will find that the build job has failed, refresh the website to see that there is no change and the website is still working.
+
+
+- An email is sent to the contributors alerting them that the work flow run has failed.
