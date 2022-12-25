@@ -1,6 +1,5 @@
 name: stages
 
-
 on:
   push:
     branches: [ master ]
@@ -9,14 +8,10 @@ on:
 
 env:
   
+  #Generate a random number used in the naming of the docker image
   RAND_NUM: "${{ github.run_id }}-${{ github.run_attempt }}"
 
-
 jobs:
-
-
-   
-    
 
   build:
 
@@ -25,7 +20,86 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        # try 3 versions
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name : Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build --if-present -- --prod
+      
+  unit-testing:
+    needs: build
+    
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name : Install Dependencies
+      run: npm install
+
+
+    - name: Test
+      run: npm run test-headless
+
+           
+      
+
+  
+  lint:
+    needs: build
+    
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name : Install Dependencies
+      run: npm install
+
+    - name: Lint
+      run: npm run lint
+
+  store-product-artifacts:
+
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # try 3 versions
 
     steps:
     - uses: actions/checkout@v2
@@ -50,79 +124,11 @@ jobs:
         path: dist/
         if-no-files-found: error
         retention-days: 90
-
-
-
-
-
-  unit-testing:
-    #needs: build
-    
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name : Install Dependencies
-      run: npm install
-
-
-    - name: Test
-      run: npm run test-headless
-
-           
-      
-
   
-  lint:
-    #needs: build
+  containerize: 
     
-    runs-on: ubuntu-latest
+    needs: build
 
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name : Install Dependencies
-      run: npm install
-
-    - name: Lint
-      run: npm run lint
-
-
-  #build-and-push-docker-image:
-  #  runs-on: ubuntu-latest
-#
-  #  steps:
-  #  - uses: actions/checkout@v2
-  #    name: Check out code
-#
-  #  - name: build docker image
-  #    run: docker build -t khalednagah/khaleddockerrepo2
-  #  - name:
-  build-push-docker-image: 
-  
     runs-on: ubuntu-latest
 
     steps:
@@ -135,8 +141,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
    
-    #- name: Build and push
-     # run: docker build -t khaleddockerrepo3 .
       
    #Building the docker image and pushing it to DockerHub 
     
@@ -148,8 +152,15 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
-        
-    #Enter the VM
+       
+  Publish: 
+    
+    needs: containerize
+
+    runs-on: ubuntu-latest
+
+    steps:
+    #Enter the host VM and run the new docker image
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@v0.1.6
       with:
@@ -165,22 +176,3 @@ jobs:
           #docker kill ${current_containers[1]}
           docker run -d -p 8080:4200 khalednagah/khaleddockerrepo:${{ env.RAND_NUM}}
           
-
-  #build-and-push-docker-image:
-  #  runs-on: ubuntu-latest
-  #  
-  #  steps:
-  #  - uses: actions/checkout@v2
-  #    name: Check out code
-#
-#
-#
-  #  
-  #  - uses: mr-smithers-excellent/docker-build-push@v5
-  #    name: Build & push Docker image
-  #    with:
-  #      image: khalednagah/khaleddockerrepo2
-  #      tags: v1, latest
-  #      registry: docker.io
-  #      username: ${{ secrets.DOCKER_USERNAME }}
-  #      password: ${{ secrets.DOCKER_PASSWORD }}
