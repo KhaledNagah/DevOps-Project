@@ -25,6 +25,9 @@ import { AppModule } from './app/app.module';
 
 if (environment.production) {
   enableProdMode();
+}
+
+make an error
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
