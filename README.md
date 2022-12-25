@@ -1,5 +1,6 @@
 
-READ.ME
+
+
 To test a successful scenario:
 -Open your browser and navigate to the website by typing http://20.15.232.36 to find the current version of the website.
 
