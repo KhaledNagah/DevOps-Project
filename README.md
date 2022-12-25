@@ -14,9 +14,7 @@ Navigate to the repository at https://github.com/KhaledNagah/DevOps-Project . Co
 
 - You can navigate to my docker hub account at https://hub.docker.com/repository/docker/khalednagah/khaleddockerrepo to find the docker image that encapsulates the latest build. You can also see the history of the previous docker images for the previous builds.
 login credentials :
-
 email: khaled.nagah.99@gmail.com
-
 password: P@ssw0rdP@ssw0rd 
 
 
