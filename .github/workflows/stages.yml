@@ -155,7 +155,7 @@ jobs:
        
   Publish: 
     
-    #needs: containerize
+    needs: containerize
 
     runs-on: ubuntu-latest
 
