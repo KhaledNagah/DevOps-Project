@@ -1,3 +1,4 @@
+<!doctype html>
 <!--
   ~ /*
   ~  * Copyright 2016-2017 the original author or authors.
@@ -16,74 +17,20 @@
   ~  */
   -->
 
-<div class="container-fluid">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SpringPetclinicAngular</title>
+  <base href="/petclinic">
 
-<nav class="navbar navbar-default " role="navigation">
-  <div class="container-fluid">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#"><span></span></a>
-  </div>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <ul class="nav navbar-nav">
-      <li>
-        <a routerLink="welcome" title="home page">
-          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-          <span>Home</span>
-        </a>
-      </li>
-
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button"
-           aria-haspopup="true" aria-expanded="false">Owners<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a routerLink="/owners"><span class="glyphicon glyphicon-search"
-                                            aria-hidden="true"></span><span> Search</span></a></li>
-          <li><a routerLink="/owners/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span> Add New</span></a>
-          </li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button"
-           aria-haspopup="true" aria-expanded="false">Veterinarians<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a routerLink="/vets"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span>All</span></a>
-          </li>
-          <li><a routerLink="/vets/add"><span class="glyphicon glyphicon-plus"
-                                              aria-hidden="true"></span><span> Add New</span></a></li>
-        </ul>
-      </li>
-      <li>
-        <a routerLink="/pettypes" routerLinkActive="active" title="pettypes">
-          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-          <span>Pet Types</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/specialties" routerLinkActive="active" title="specialties">
-          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-          <span>Specialties</span>
-        </a>
-      </li>
-    </ul>
-
-  </div>
-</nav>
-
-</div>
+</head>
+<body>
 
 
 
-<router-outlet></router-outlet>
-
-<br/>
-<br/>
-<div class="container">
-  <div class="row">
-    <div class="col-12 text-center"><img src="./assets/images/angular.png"
-                                         alt="Angular" height="80" width="80"/>
-      <img src="./assets/images/spring-pivotal-logo.png"
-           alt="Sponsored by Pivotal"/></div>
-  </div>
-</div>
+<app-root>This is the current version</app-root>
+</body>
+</html>
