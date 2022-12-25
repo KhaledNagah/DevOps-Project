@@ -27,7 +27,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-make an error
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
