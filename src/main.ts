@@ -27,7 +27,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-
+This is a syntax error
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
