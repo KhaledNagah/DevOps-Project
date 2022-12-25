@@ -92,7 +92,7 @@ jobs:
 
   store-product-artifacts:
 
-    needs: build
+    needs: [unit-testing,lint]
 
     runs-on: ubuntu-latest
 
